@@ -60,7 +60,10 @@ var (
 	tokenChar        = append(alpha, append(decimalDigit, simplePunc...)...)
 	base64Encoding   = base64.StdEncoding
 	stringChar       = append(tokenChar, append(hexadecimalDigit, []byte("\"|#")...)...)
-	stringEncChar    = append(stringChar, []byte("\b\t\v\n\f\r\"'\\ ")...)
+	reservedPunc     = []byte("()[]{}|#\"&\\")
+	unusedChar       = []byte("!%^~;',<>?")
+	extendedChar     = append(reservedPunc, unusedChar...)
+	stringEncChar    = append(extendedChar, append(stringChar, []byte("\b\t\v\n\f\r\"'\\ ")...)...) 
 )
 
 // Sexp is the interface implemented by both lists and atoms.

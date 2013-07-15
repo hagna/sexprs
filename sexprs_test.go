@@ -19,6 +19,16 @@ func TestAtomToString(t *testing.T) {
 	}
 }
 
+func TestString(t *testing.T) {
+	v := `"()[]{}|#&\\\"!%^~;',<>?"`
+	s, _, _ := Parse([]byte(v))
+	if s.String() != v {
+		t.Fatalf("should be quote encoded but %s != %s", v, s.String())
+	} else {
+		t.Logf("good, %s == %s", s.String(), v)
+	}
+}
+
 func TestSlice(t *testing.T) {
 	slice := []Sexp{Atom{Value: []byte("Foo")},
 		Atom{Value: []byte("bar")}}
